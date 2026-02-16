@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('./config/db');
+const charactersRoutes = require('./routes/characters.route');
 
 const app = express();
 
@@ -9,13 +9,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
-app.get('/test-db', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+app.use('/api/characters', charactersRoutes);
 
 module.exports = app;
