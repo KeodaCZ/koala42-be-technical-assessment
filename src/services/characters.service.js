@@ -45,7 +45,7 @@ function buildTree(rows) {
           name: row.name,
           gender: normalizeGender(row.gender),
           ability: row.ability,
-          weight: row.weight,
+          weight: row.weight !== null ? Number(row.weight) : null,
           born: row.born,
           beer_consumption: row.beer_consumption,
           knows_the_answer: row.knows_the_answer
