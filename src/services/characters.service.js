@@ -22,6 +22,16 @@ exports.getAllCharacters = async () => {
   return buildTree(result.rows);
 };
 
+function normalizeGender(gender) {
+  if (!gender) return 'other';
+
+  const value = gender.toString().toLowerCase();
+
+  if (value === 'm' || value === 'male') return 'male';
+  if (value === 'f' || value === 'female') return 'female';
+
+  return 'other';
+}
 
 function buildTree(rows) {
   const charactersMap = {};
@@ -33,7 +43,7 @@ function buildTree(rows) {
         data: {
           id: row.id,
           name: row.name,
-          gender: row.gender,
+          gender: normalizeGender(row.gender),
           ability: row.ability,
           weight: row.weight,
           born: row.born,
